@@ -8,36 +8,34 @@ const chats = conn.chats.all()
 const groups = chats.filter(v => v.jid.endsWith('g.us'))
 const defaultMenu = {
   before: `
-┏━━━ꕥ〔 *ShiroBotz* 〕ꕥ━⬣
-┃✾ Hai, %name!
+┏━━━❖〔 *Kanao-Bot* 〕❖━⬣
+┃❖ Hai, %name!
 ┃
-┃✾ Tersisa *%limit Limit*
-┃✾ Role *%role*
-┃✾ Level *%level (%exp / %maxexp)* 
-┃✾ [%xp4levelup]
-┃✾ %totalexp XP secara Total
-┗━ꕥ
-┏━ꕥ 
-┃✾ Hari : *%week %weton* 
-┃✾ Tanggal : *%date*
-┃✾ Tanggal Islam : *%dateIslamic*
-┗━ꕥ
-┏━ꕥ
-┃✾ Uptime: *%uptime (%muptime)*
-┃✾ Database: %rtotalreg dari %totalreg
-┃✾ Instagram:
-┃✾ shiroo_craziiphat
-┗━━━━━━ꕥ`.trimStart(),
-  header: '┏━━ꕥ〔 *%category* 〕ꕥ━⬣',
-  body: '┃✾%cmd %islimit %isPremium',
-  footer: '┗━ꕥ\n',
+┃❖ Tersisa *%limit Limit*
+┃❖ Role *%role*
+┃❖ Level *%level (%exp / %maxexp)* 
+┃❖ [%xp4levelup]
+┃❖ %totalexp XP secara Total
+┗━❖
+┏━❖ 
+┃❖ Hari : *%week %weton* 
+┃❖ Tanggal : *%date*
+┃❖ Tanggal Islam : *%dateIslamic*
+┗━❖
+┏━❖
+┃❖ Uptime: *%uptime (%muptime)*
+┃❖ Database: %rtotalreg dari %totalreg
+┃❖ Instagram:
+┃❖ shiroo_craziiphat
+┗━━━━━━❖`.trimStart(),
+  header: '┏━━❖〔 *%category* 〕❖━⬣',
+  body: '┃❖%cmd %islimit %isPremium',
+  footer: '┗━❖\n',
   after: `
-*ShiroBotz@^%version*
+*Kanao-Bot@^%version*
 `,
 }
 let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
-	let bzz = fs.readFileSync('./vn/forme.mp3')
-	let bzz2 = fs.readFileSync('./vn/AUD-20220214-WA0408')
 	let { anon, anticall, antispam, antitroli, backup, jadibot, groupOnly, nsfw } = global.db.data.settings[conn.user.jid]
     let totaljadibot = [...new Set([...global.conns.filter(conn => conn.user && conn.state !== 'close').map(conn => conn.user)])]
 
@@ -242,164 +240,343 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
         "listMessage": {
           "title": `${ucapan()}, ${name}`.trim(),
           "description": `
-┏━━ꕥ〔 *ShiroBotz* 〕ꕥ━⬣
-┃✾ Aktif selama ${uptime}
-┃✾ Baterai ${conn.battery != undefined ? `${conn.battery.value}% ${conn.battery.live ? '🔌 pengisian' : ''}` : 'tidak diketahui'}
-┃✾ *${Object.keys(global.db.data.users).length}* Pengguna
-┃✾ *${totaljadibot.length}* Jadibot
-┃✾ *${conn.blocklist.length}* Terblock
-┃✾ *${Object.entries(global.db.data.chats).filter(chat => chat[1].isBanned).length}* Chat Terbanned
-┃✾ *${Object.entries(global.db.data.users).filter(user => user[1].banned).length}* Pengguna Terbanned
-┗━ꕥ
-┏━ꕥ
-┃✾ Script by Lord Hyzer愛
-┃✾ Github Name : https://github.com/Hyzerr
-┃✾ IG Owner : shiroo_craziiphat
-┃✾ *スパムしないでください*
+┏━━❖〔 KANAO-BOT 〕❖━⬣
+┃❖ Aktif selama ${uptime}
+┃❖ Baterai ${conn.battery != undefined ? `${conn.battery.value}% ${conn.battery.live ? '🔌 pengisian' : ''}` : 'tidak diketahui'}
+┃❖ *${Object.keys(global.db.data.users).length}* Pengguna
+┃❖ *${totaljadibot.length}* Jadibot
+┃❖ *${conn.blocklist.length}* Terblock
+┃❖ *${Object.entries(global.db.data.chats).filter(chat => chat[1].isBanned).length}* Chat Terbanned
+┃❖ *${Object.entries(global.db.data.users).filter(user => user[1].banned).length}* Pengguna Terbanned
 ┗━━━━━━━━⬣`.trim(),
+          "footerText": "Hi kak >//<",
+
           "buttonText": "KLIK DISINI",
           "listType": "SINGLE_SELECT",
           "sections": [
             {
-              "rows": [
-                {
-                  "title": `[🧾] Semua Perintah`,
-                  "description": "Memberikan Semua Fitur Bot",
-                  "rowId": ".? all"
-                }, {
-                  "title": "[🕋] Islam",
-                  "description": "Menu Tentang Islam",
-                  "rowId": ".? quran"
-                }, {
-                  "title": "[🏫] Edukasi",
-                  "description": "Menu Edukasi",
-                  "rowId": ".? edukasi"
-                }, {
-                  "title": "[📰] News",
-                  "description": "Menu Berita",
-                  "rowId": ".? News"
-                },  {
-                  "title": "[🎮] Game",
-                  "description": "Menu Game",
-                  "rowId": ".? game"
-                }, {
-                  "title": "[🗺️] Epic Rpg",
-                  "description": "Menu Game RPG",
-                  "rowId": ".? rpg"
-                }, {
-                  "title": "[📈] XP",
-                  "description": "XP Dan Level",
-                  "rowId": ".? xp"
-                },  {
-                  "title": "[🔞] NSFW",
-                  "description": "Menu Bokep",
-                  "rowId": ".? nsfw"
-                }, {
-                  "title": "[🖼️] Random Image",
-                  "description": "Menu Foto Random",
-                  "rowId": ".? image"
-                }, {
-                  "title": "[🎇] Stiker",
-                  "description": "Menu Buat Stiker",
-                  "rowId": ".? stiker"
-                }, {
-                  "title": "[🐚] Kerang Ajaib",
-                  "description": "Menurut Kerang ajaib....",
-                  "rowId": ".? kerangajaib"
-                }, {
-                  "title": "[📑] Quotes",
-                  "description": "Menu Quotes",
-                  "rowId": ".? quotes"
-                }, {
-                  "title": "[🏛️] Admin",
-                  "description": "Menu Admin Group",
-                  "rowId": ".? admin"
-                }, {
-                  "title": "[🏢] Grup",
-                  "description": "Menu Group",
-                  "rowId": ".? grup"
-                }, {
-                  "title": "[🔝] Premium",
-                  "description": "Menu Untuk Premium",
-                  "rowId": ".? premium"
-                }, {
-                  "title": "[🖥️] Internet",
-                  "description": "Cari Sesuatu Di Bot",
-                  "rowId": ".? internet"
-                }, {
-                  "title": "[🥷] Anonymous",
-                  "description": "Mainkan Anonymous Chat",
-                  "rowId": ".? anonymous"
-                }, {
-                  "title": "[✒️] Nulis & Logo",
-                  "description": "Menu Nulis & Logo",
-                  "rowId": ".? nulis"
-                }, {
-                  "title": "[📺] Downloader",
-                  "description": "Download Sesuatu Di Bot",
-                  "rowId": ".? downloader"
-                }, {
-                  "title": "[🔧] Tools",
-                  "description": "Tools Yang Bisa di Gunakan Di Bot",
-                  "rowId": ".? tools"
-                }, {
-                  "title": "[🎇] Fun",
-                  "description": "Menu Ceria",
-                  "rowId": ".? fun"
-                }, {
-                  "title": "[📂] Database",
-                  "description": "Simpan Sesuatu Di Bot",
-                  "rowId": ".? database"
-                }, {
-                  "title": "[📝] Vote & Absen",
-                  "description": "Menu Vote & Absen",
-                  "rowId": ".? vote"
-                }, {
-                  "title": "[🎙️] Pengubah Suara",
-                  "description": "Ubah Suaramu",
-                  "rowId": ".? audio"
-                }, {
-                  "title": "[🎙️] Sound Music",
-                  "description": "Dengar Music Singkat",
-                  "rowId": ".? sound"
-                }, {
-                  "title": "[🎙️] Vn Imuet",
-                  "description": "Mendengarkan Vn Yang Sangat Imuet",
-                  "rowId": ".? vn"
-                }, {
-                  "title": "[🤖] Jadi Bot",
-                  "description": "Jadi Bot",
-                  "rowId": ".? jadibot"
-                }, {
-                  "title": "[⛩️] Anime",
-                  "description": "Cari Anime Di Bot",
-                  "rowId": ".? anime"
-                }, {
-                  "title": "[ℹ️] Info",
-                  "description": "Info Tentang Bot",
-                  "rowId": ".? info"
-                }, {
-                  "title": "[🔧] Virus",
-                  "description": "Virus Yang Bisa Membuat Whatsapp Orang Ngelag/Error",
-                  "rowId": ".? virus"
-                }, {
-                  "title": "Tanpa Kategori",
-                  "description": "",
-                  "rowId": ".? tanpakategori"
-                }, {
-                  "title": "[🧑‍💻] Owner",
-                  "description": "Menu Khusu Owner",
-                  "rowId": ".? owner"
-                }
-              ]
-            }
-          ], "contextInfo": {
-            "stanzaId": m.key.id,
-            "participant": m.sender,
-            "quotedMessage": m.message
-          }
-        }
-      }, {}), { waitForAck: true })
+                                "rows": [{
+
+                                    "title": "|🛠️|Status Bot",
+
+                                    "description": "Status dan informasi Bot.",
+
+                                    "rowId": ".botstatus"
+
+                                }, {
+
+                                    "title": "|❗|Rules",
+
+                                    "description": "User yang bijak selalu mematuhi Rules.",
+
+                                    "rowId": ".rules"
+
+                                }, {
+
+                                    "title": "|👑|Sewa bot - Premium",
+
+                                    "description": "Untuk kamu yang ingin melihat daftar harga sewa dan premium.",
+
+                                    "rowId": ".sewabot"
+
+                                }],
+
+                                "title": "⟣─────────❲ Tentang Bot dan lainnya ❳──────────⟢"
+
+                            }, {
+
+                                "rows": [{
+
+                                    "title": `|🧾| Semua Perintah`,
+
+                                    "description": "Memberikan Semua Fitur Bot",
+
+                                    "rowId": ".? all"
+
+                                }, { 
+
+                                    "title": "|🕋| Islam",
+
+                                    "description": "Menu Tentang Islam",
+
+                                    "rowId": ".? quran"
+
+                                }, { 
+
+                                    "title": "|🏫| Edukasi",
+
+                                    "description": "Menu Edukasi",
+
+                                    "rowId": ".? edukasi"
+
+                                }, { 
+
+                                    "title": "|📰| News",
+
+                                    "description": "Menu Berita",
+
+                                    "rowId": ".? News"
+
+                                }, { 
+
+                                    "title": "|🎮| Game",
+
+                                    "description": "Menu Game",
+
+                                    "rowId": ".? game"
+
+                                }, { 
+
+                                    "title": "|🗺️| Epic Rpg",
+
+                                    "description": "Menu Game RPG",
+
+                                    "rowId": ".? rpg"
+
+                                }, { 
+
+                                    "title": "|📈| XP",
+
+                                    "description": "XP Dan Level",
+
+                                    "rowId": ".? xp"
+
+                                }, { 
+
+                                    "title": "|🔞| NSFW",
+
+                                    "description": "Menu Bokep",
+
+                                    "rowId": ".? nsfw"
+
+                                }, { 
+
+                                    "title": "|🖼️| Random Image",
+
+                                    "description": "Menu Foto Random",
+
+                                    "rowId": ".? image"
+
+                                }, { 
+
+                                    "title": "|🎇| Stiker",
+
+                                    "description": "Menu Buat Stiker",
+
+                                    "rowId": ".? stiker"
+
+                                }, { 
+
+                                    "title": "|🐚| Kerang Ajaib",
+
+                                    "description": "Menurut Kerang ajaib....",
+
+                                    "rowId": ".? kerangajaib"
+
+                                }, { 
+
+                                    "title": "|📑| Quotes",
+
+                                    "description": "Menu Quotes",
+
+                                    "rowId": ".? quotes"
+
+                                }, { 
+
+                                    "title": "|🏛️| Admin",
+
+                                    "description": "Menu Admin Group",
+
+                                    "rowId": ".? admin"
+
+                                }, { 
+
+                                    "title": "|🏢| Grup",
+
+                                    "description": "Menu Group",
+
+                                    "rowId": ".? grup"
+
+                                }, { 
+
+                                    "title": "|🔝| Premium",
+
+                                    "description": "Menu Untuk Premium",
+
+                                    "rowId": ".? premium"
+
+                                }, { 
+
+                                    "title": "|🖥️| Internet",
+
+                                    "description": "Cari Sesuatu Di Bot",
+
+                                    "rowId": ".? internet"
+
+                                }, { 
+
+                                    "title": "|🥷| Anonymous",
+
+                                    "description": "Mainkan Anonymous Chat",
+
+                                    "rowId": ".? anonymous"
+
+                                }, { 
+
+                                    "title": "|✒️| Nulis & Logo",
+
+                                    "description": "Menu Nulis & Logo",
+
+                                    "rowId": ".? nulis"
+
+                                }, { 
+
+                                    "title": "|📺| Downloader",
+
+                                    "description": "Download Sesuatu Di Bot",
+
+                                    "rowId": ".? downloader"
+
+                                }, { 
+
+                                    "title": "|🔧| Tools",
+
+                                    "description": "Tools Yang Bisa di Gunakan Di Bot",
+
+                                    "rowId": ".? tools"
+
+                                }, { 
+
+                                    "title": "|🎇| Fun",
+
+                                    "description": "Menu Ceria",
+
+                                    "rowId": ".? fun"
+
+                                }, { 
+
+                                    "title": "|📂| Database",
+
+                                    "description": "Simpan Sesuatu Di Bot",
+
+                                    "rowId": ".? database"
+
+                                }, { 
+
+                                    "title": "|📝| Vote & Absen",
+
+                                    "description": "Menu Vote & Absen",
+
+                                    "rowId": ".? vote"
+
+                                }, { 
+
+                                    "title": "|🎙️| Pengubah Suara",
+
+                                    "description": "Ubah Suaramu",
+
+                                    "rowId": ".? audio"
+
+                                }, { 
+
+                                    "title": "|🤖| Jadi Bot",
+
+                                    "description": "Jadi Bot",
+
+                                    "rowId": ".? jadibot"
+
+                                }, { 
+
+                                    "title": "|⛩️| Anime",
+
+                                    "description": "Cari Anime Di Bot",
+
+                                    "rowId": ".? anime"
+
+                                }, { 
+
+                                    "title": "|ℹ️| Info",
+
+                                    "description": "Info Tentang Bot",
+
+                                    "rowId": ".? info"
+
+                                }, { 
+
+                                    "title": "|─|Tanpa Kategori",
+
+                                    "description": "",
+
+                                    "rowId": ".? tanpakategori"
+
+                                }, { 
+
+                                    "title": "|🧑‍💻| Owner",
+
+                                    "description": "Menu Khusu Owner",
+
+                                    "rowId": ".? owner"
+
+                                }],
+
+                                "title": "⟣──────────────❲  All-Menu  ❳──────────────⟢"
+
+                            }, {
+
+                                "rows": [{
+
+                                    "title": "|👩🏻‍💼|Owner bot",
+
+                                    "description": "pemilik Bot",
+
+                                    "rowId": ".owner"
+
+                                }, {
+
+                                    "title": "|💰|Donasi",
+
+                                    "description": "Jangan lupa donasi untuk mendukung bot agar aktif selalu",
+
+                                    "rowId": ".donasi"
+
+                                }, {
+
+                                    "title": "|🥀|Kata penutup",
+
+                                    "description": "Terimakasih untuk user yang telah menggunakan bot, jika ada kesalahan atau permintaan bisa chat ke nomor owner\nNote: chat P/main² tidak akan di respon(user bisa terkena banned/block)",
+
+                                    "rowId": ".creator"
+
+                                }, {
+
+                                    "title": "|❤️|Thanks To",
+
+                                    "description": "Terima kasih banyak untuk user yang telah berpartisipasi dalam bot",
+
+                                    "rowId": ".tqto"
+
+                                }],
+
+                                "title": "⟣──────────────❲ Penutup ❳───────────────⟢"
+
+                            }
+
+                        ], "contextInfo": 
+
+						{ "stanzaId": m.key.id,
+
+                        "participant": "0@s.whatsapp.net",
+
+                        "remoteJid": "6283136505591-1614953337@g.us",
+
+                        "quotedMessage": m.message
+
+						}
+
+                    }
+
+                 }, {}), {waitForAck: true})
+
     }
     // gunakan ini jika kamu menggunakan whatsapp bisnis
     //   throw `
@@ -483,8 +660,6 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     await conn.send3ButtonLoc(m.chat, await (await fetch(fla + teks)).buffer(), text.trim(), footer, '🧒 Pemilik Bot', '.owner', '💲 Donasi', '.donasi', '📍 Rules', '.infobot', m)
     // await conn.send3ButtonLoc(m.chat, await (await fetch(`https://i.ibb.co/fH0hppT/mikey.jpg`)).buffer(), text.trim(), 'Recoded By Dawnfrosty', 'Pemilik Bot', '.owner', 'Donasi', '.donasi', 'Rules', '.infobot', m)
-    await conn.sendFile(m.chat, bzz, 'bzz.opus', null, m, true)
-    await conn.sendFile(m.chat, bzz2, 'bzz2.opus', null, m, true)
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
